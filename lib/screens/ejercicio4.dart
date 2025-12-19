@@ -1,6 +1,4 @@
-/*
-Usar el siguiente enlace para presentar una lista.
- Indicar por lo menos 3 datos  donde uno de ellos  sea una imagen */
+import 'dart:convert';
 import 'package:flutter/material.dart';
 
 class Ejercicio4 extends StatelessWidget {
@@ -8,6 +6,48 @@ class Ejercicio4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(title: const Text("Lista de Películas")),
+      body: listar(context),
+    );
   }
+}
+
+Future<List> leerLista(BuildContext context) async {
+  final jsonString = await DefaultAssetBundle.of(
+    context,
+  ).loadString("assets/data/peliculas.json");
+
+  return json.decode(jsonString)["peliculas"];
+}
+
+Widget listar(BuildContext context) {
+  return FutureBuilder(
+    future: leerLista(context),
+    builder: (context, snapshot) {
+      if (snapshot.hasData) {
+        final data = snapshot.data as List;
+
+        return ListView.builder(
+          itemCount: data.length,
+          itemBuilder: (context, index) {
+            final item = data[index];
+
+            return ListTile(
+              title: Text(item["titulo"]),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Año: ${item["anio"]}"),
+                  Image.network(item["imagen"], width: 100, height: 150),
+                ],
+              ),
+            );
+          },
+        );
+      } else {
+        return Text('No hay Texto');
+      }
+    },
+  );
 }

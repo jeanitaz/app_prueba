@@ -31,86 +31,40 @@ class _Ejercicio2State extends State<Ejercicio2> {
 
     setState(() {
       _resultado =
-          "Costo Total del Viaje: \$${costoTotal.toStringAsFixed(2)}\n"
-          "(Litros consumidos: ${litrosConsumidos.toStringAsFixed(2)} L)";
+          "Costo Total: \$${costoTotal.toStringAsFixed(2)}\n"
+          "(Litros: ${litrosConsumidos.toStringAsFixed(2)} L)";
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(20.0),
       child: Column(
         children: [
-          Text(
-            "Calculadora de Combustible",
-            style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-          ),
-          SizedBox(height: 30),
-
+          const Text("Calculadora de Combustible"),
           TextField(
             controller: _distanciaController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: "Distancia del viaje (km)",
-              border: OutlineInputBorder(),
-            ),
+            decoration: const InputDecoration(labelText: "Distancia del viaje (km)"),
           ),
-          SizedBox(height: 15),
-
           TextField(
             controller: _precioController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
-              labelText: "Precio por litro",
-              border: OutlineInputBorder(),
-            ),
+            decoration: const InputDecoration(labelText: "Precio por litro"),
           ),
-          SizedBox(height: 15),
-
           TextField(
             controller: _eficienciaController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: "Eficiencia (km por litro)",
               hintText: "Ej: 14",
-              border: OutlineInputBorder(),
             ),
           ),
-          SizedBox(height: 30),
-
-          ElevatedButton.icon(
+          ElevatedButton(
             onPressed: _calcularCosto,
-            icon: Icon(Icons.calculate),
-            label: Text("Calcular Costo"),
-            style: ElevatedButton.styleFrom(
-              padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              textStyle: TextStyle(fontSize: 18),
-            ),
+            child: const Text("Calcular Costo"),
           ),
-
-          SizedBox(height: 30),
-
-          Container(
-            padding: EdgeInsets.all(15),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.blue.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: Colors.blue),
-            ),
-            child: Text(
-              _resultado.isEmpty ? "Esperando datos..." : _resultado,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: _resultado.startsWith("Error")
-                    ? Colors.red
-                    : Colors.blue[900],
-              ),
-            ),
-          ),
+          Text(_resultado),
         ],
       ),
     );

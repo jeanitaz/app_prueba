@@ -5,96 +5,100 @@ import 'package:app_prueba/screens/ejercicio4.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const Evaluacion());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Evaluacion extends StatelessWidget {
+  const Evaluacion({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Pantalla Principal',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const Ejercicio1Screen(),
-    );
+    return const MaterialApp(home: Cuerpo());
   }
 }
 
-class Ejercicio1Screen extends StatefulWidget {
-  const Ejercicio1Screen({super.key});
+class Cuerpo extends StatefulWidget {
+  const Cuerpo({super.key});
 
   @override
-  State<Ejercicio1Screen> createState() => _Ejercicio1ScreenState();
+  State<Cuerpo> createState() => _CuerpoState();
 }
 
-class _Ejercicio1ScreenState extends State<Ejercicio1Screen> {
+class _CuerpoState extends State<Cuerpo> {
   int indice = 0;
 
-  List<Widget> paginas = [
-    const Ejercicio1(),
-    const Ejercicio2(),
-    const Ejercicio3(),
-    const Ejercicio4(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      indice = index;
-    });
-  }
-
-  void _mostrarInformacion(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text("Ejercicios", textAlign: TextAlign.center),
-          content: const Text("Programador: Juan Paz\nCarrera: Software"),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text("Cerrar"),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> paginas = [
+      Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/img/pixel.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+      ),
+      const Ejercicio1(),
+      const Ejercicio2(),
+      const Ejercicio3(),
+      const Ejercicio4(),
+    ];
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ejercicio ${indice + 1}'),
+        title: Text("Ejercicios"),
         actions: [
           IconButton(
             icon: const Icon(Icons.info_outline),
-            onPressed: () => _mostrarInformacion(context),
+            onPressed: () => _mostrarInfo(context),
           ),
         ],
       ),
-
       body: paginas[indice],
-
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: indice,
-        onTap: _onItemTapped,
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.blue,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white70,
+        currentIndex: indice,
+        onTap: (value) {
+          setState(() {
+            indice = value;
+          });
+        },
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.flash_on), label: 'Ejer 1'),
-          BottomNavigationBarItem(icon: Icon(Icons.calculate), label: 'Ejer 2'),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.text_fields),
-            label: 'Ejer 3',
+            icon: Icon(Icons.list_alt_rounded),
+            label: 'Ej 1',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Ejer 4'),
+
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_rounded),
+            label: 'Ej 2',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_rounded),
+            label: 'Ej 3',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_alt_rounded),
+            label: 'Ej 4',
+          ),
         ],
       ),
     );
   }
+}
+
+void _mostrarInfo(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text("Titulo :Ejercicios de Programación "),
+      content: Column(
+        children: [
+          Text("Programador: Christopher  Chasiloa"),
+          Text("Carrera: Desarrollo de Software"),
+        ],
+      ),
+    ),
+  );
 }
