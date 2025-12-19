@@ -81,7 +81,6 @@ class _Ejercicio1State extends State<Ejercicio1> {
                       decoration: const InputDecoration(
                         labelText: "Masa (kg)",
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.fitness_center),
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -91,7 +90,6 @@ class _Ejercicio1State extends State<Ejercicio1> {
                       decoration: const InputDecoration(
                         labelText: "Velocidad (m/s)",
                         border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.speed),
                       ),
                     ),
                     const SizedBox(height: 30),
@@ -111,7 +109,7 @@ class _Ejercicio1State extends State<Ejercicio1> {
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent,
+                        color: Color.fromARGB(255, 0, 0, 0),
                       ),
                     ),
                   ],
