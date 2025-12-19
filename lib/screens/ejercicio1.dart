@@ -62,7 +62,6 @@ class _Ejercicio1State extends State<Ejercicio1> {
               Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Column(
